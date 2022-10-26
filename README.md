@@ -1,2 +1,2 @@
-# exp-spring-vue
+# exp-spring
 Experimental Spring with VueJS
