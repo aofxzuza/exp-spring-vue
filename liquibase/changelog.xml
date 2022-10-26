@@ -21,4 +21,16 @@
             <column name="country" type="varchar(2)"/>
         </addColumn>
     </changeSet>
+    <changeSet author="Rattapong K." id="3">
+        <insert tableName="test_table">
+            <column name="test_id" valueNumeric="1"/>
+            <column name="test_column" value="RTPK"/>
+            <column name="country" value="TH"/>
+        </insert>
+        <insert tableName="test_table">
+            <column name="test_id" valueNumeric="2"/>
+            <column name="test_column" value="RTPK"/>
+            <column name="country" value="TH"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

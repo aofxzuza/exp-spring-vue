@@ -25,6 +25,15 @@ liquibase rollback-count 1
 
 # Get history for all change sets
 liquibase history
+
+# Manully execute sql command
+liquibase execute-sql --sql-file=insert-data.sql
+
+# Generate changelog with insert statement
+liquibase generate-changelog --changelog-file=dbchangelog.xml --diffTypes="data"
+
+# Mark all undeployed changes in your changelog as executed
+liquibase changelog-sync
 ```
 
 ## Usage
