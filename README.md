@@ -21,6 +21,7 @@ docker compose up -d
 ```
 Run database migration
 ```bash
+cd liquibase
 liquibase update
 ```
 
