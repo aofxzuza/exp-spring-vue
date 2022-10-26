@@ -1,2 +1,4 @@
 rootProject.name = 'exp-spring'
+include 'service-a'
+include 'service-b'
 
