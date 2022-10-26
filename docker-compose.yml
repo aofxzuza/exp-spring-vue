@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres:12.9-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: liquibase
+      PGDATA: /data/postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/data/postgres
+volumes:
+  postgres:
