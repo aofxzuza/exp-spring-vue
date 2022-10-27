@@ -31,11 +31,16 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("Id is not found"));
     }
 
-    public UserEntity addUser(String name, String country){
-        return null;
+    public UserEntity addUser(String name, String country) {
+        LOGGER.debug("Add new user with name {} country {}", name, country);
+        return userRepository.save(new UserEntity(null, name, country));
     }
 
-    public UserEntity deleteUser(Long id){
-        return null;
+    public UserEntity deleteUser(Long id) {
+        LOGGER.debug("Delete user by id {}", id);
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Id is not found"));
+        userRepository.delete(user);
+        return user;
     }
 }
