@@ -23,7 +23,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public UserEntity getUserById(int id) {
+    public UserEntity getUserById(Long id) {
         LOGGER.debug("Get user by id {}", id);
         return userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Id is not found"));
