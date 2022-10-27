@@ -2,18 +2,7 @@
 Experimental Spring with VueJS
 
 ## Development
-
-### Run test
-```bash
-./gradlew test
-```
-
-### Compiles, tests and assembles the code into JAR file
-```bash
-./gradlew build
-```
-
-### Run an application
+### Setup
 #### Database
 Run docker-compose contain postgresql
 ```bash
@@ -24,9 +13,24 @@ Run database migration
 cd liquibase
 liquibase update
 ```
+### Run test
+```bash
+./gradlew test
+```
+
+### Compiles, tests and assembles the code into JAR file
+```bash
+./gradlew build
+```
+### Clean up
+remove containers and volumes
+```bash
+docker compose down -v
+```
+### Run an application
 
 #### Service A
-The api on http://localhost:8081/table
+The api on http://localhost:8081/user
 ```bash
 ./gradlew :service-a:bootRun
 ```
@@ -36,17 +40,20 @@ The api on http://localhost:8082/table
 ./gradlew :service-b:bootRun
 ```
 ### Usage
-Get table from service A
+#### API usage for service A
 ```bash
-curl -i "http://localhost:8081/table"
-```
-Get table from service B
-```bash
-curl -i "http://localhost:8082/table"
+# get all users
+curl -i "http://localhost:8081/user"
+
+# get a single user
+curl -i "http://localhost:8081/user/1"
+
+# create user
+curl -i -X POST "http://localhost:8081/user" \
+      -H "Content-Type:application/json" \
+      -d '{ "name": "rtpk", "country": "TH" }'
+      
+# delete user
+curl -i -X DELETE "http://localhost:8081/user/7"
 ```
 
-### Clean up
-remove containers
-```bash
-docker compose down -v
-```
