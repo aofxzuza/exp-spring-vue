@@ -27,7 +27,7 @@ class UserServiceSpec extends Specification {
         user != null
     }
 
-    def "userService must throw NotFoundException when is doesn't exist"() {
+    def "userService must throw NotFoundException when the id doesn't exist"() {
         when:
         userService.getUserById(1)
 
