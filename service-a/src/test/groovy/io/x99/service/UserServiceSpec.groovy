@@ -27,7 +27,7 @@ class UserServiceSpec extends Specification {
         user != null
     }
 
-    def "userService must throw NotFoundException when the id doesn't exist"() {
+    def "userService.getUserById() must throw NotFoundException when the id doesn't exist"() {
         when:
         userService.getUserById(1)
 
@@ -36,5 +36,40 @@ class UserServiceSpec extends Specification {
         thrown NotFoundException
     }
 
+    def "userService.addUser() must be invoked save()"() {
+        given:
+        String name = "NewUser"
+        String country = "LK"
+
+        when:
+        def user = userService.addUser(name, country)
+
+        then:
+        1 * userRepo.save(_ as UserEntity) >> { args ->
+            assert args[0].name == name && args[0].country == country
+            return args[0]
+        }
+        user != null
+        user.name == name
+        user.country == country
+    }
+
+    def "userService.deleteUser() must be invoked deleteById()"() {
+        when:
+        def user = userService.deleteUser(1)
+
+        then:
+        1 * userRepo.deleteById(_) >> Optional.of(new UserEntity())
+        user != null
+    }
+
+    def "userService.deleteUser() must throw NotFoundException when the id doesn't exist"() {
+        when:
+        userService.deleteUser(1)
+
+        then:
+        1 * userRepo.deleteById(_) >> Optional.empty()
+        thrown NotFoundException
+    }
 
 }
