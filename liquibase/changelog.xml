@@ -2,34 +2,40 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
-		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
-    <changeSet id="1" author="Liquibase">
-        <createTable tableName="test_table">
-            <column name="test_id" type="int">
-                <constraints primaryKey="true"/>
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Rattapong K." id="1">
+        <createSequence  dataType="int"
+                         incrementBy="1"
+                         minValue="1"
+                         schemaName="public"
+                         sequenceName="user_id_seq"
+                         startValue="1"/>
+        <createTable tableName="users">
+            <column name="id" type="bigint" defaultValueSequenceNext="user_id_seq">
+                <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="test_column" type="varchar"/>
+            <column name="name" type="varchar"/>
         </createTable>
     </changeSet>
-    <changeSet id="2" author="Rattapong K.">
-        <addColumn tableName="test_table">
+    <changeSet author="Rattapong K." id="2">
+        <addColumn tableName="users">
             <column name="country" type="varchar(2)"/>
         </addColumn>
     </changeSet>
     <changeSet author="Rattapong K." id="3">
-        <insert tableName="test_table">
-            <column name="test_id" valueNumeric="1"/>
-            <column name="test_column" value="RTPK"/>
+        <insert tableName="users">
+            <column name="name" value="RTPK"/>
             <column name="country" value="TH"/>
         </insert>
-        <insert tableName="test_table">
-            <column name="test_id" valueNumeric="2"/>
-            <column name="test_column" value="RTPK"/>
+        <insert tableName="users">
+            <column name="name" value="RTPK2"/>
+            <column name="country" value="TH"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Rattapong K." id="4">
+        <insert tableName="users">
+            <column name="name" value="RTPK4"/>
             <column name="country" value="TH"/>
         </insert>
     </changeSet>
