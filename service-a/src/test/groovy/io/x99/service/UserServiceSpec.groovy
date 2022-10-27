@@ -59,7 +59,8 @@ class UserServiceSpec extends Specification {
         def user = userService.deleteUser(1)
 
         then:
-        1 * userRepo.deleteById(_) >> Optional.of(new UserEntity())
+        1 * userRepo.findById(_) >> Optional.of(new UserEntity())
+        1 * userRepo.delete(_)
         user != null
     }
 
@@ -68,7 +69,8 @@ class UserServiceSpec extends Specification {
         userService.deleteUser(1)
 
         then:
-        1 * userRepo.deleteById(_) >> Optional.empty()
+        1 * userRepo.findById(_) >> Optional.empty()
+        0 * userRepo.delete(_)
         thrown NotFoundException
     }
 
