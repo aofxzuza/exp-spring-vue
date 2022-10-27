@@ -44,3 +44,9 @@ Get table from service B
 ```bash
 curl -i "http://localhost:8082/table"
 ```
+
+### Clean up
+remove containers
+```bash
+docker compose down -v
+```
