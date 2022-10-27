@@ -30,4 +30,12 @@ public class UserService {
         return userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Id is not found"));
     }
+
+    public UserEntity addUser(String name, String country){
+        return null;
+    }
+
+    public UserEntity deleteUser(Long id){
+        return null;
+    }
 }
