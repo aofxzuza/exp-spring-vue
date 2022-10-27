@@ -3,15 +3,14 @@ package io.x99.controller;
 import io.x99.error.ErrorResponse;
 import io.x99.error.NotFoundException;
 import io.x99.model.UserEntity;
+import io.x99.model.UserRequest;
 import io.x99.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +33,18 @@ public class UserController {
         }
     }
 
+
+    @PostMapping("/user")
+    ResponseEntity<?> newUser(@RequestBody UserRequest userRequest) {
+        try {
+            UserEntity user = userService.addUser(userRequest.getName(), userRequest.getCountry());
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Throwable th) {
+            LOGGER.error("Internal Error", th);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
     @GetMapping("/user/{id}")
     ResponseEntity<?> one(@PathVariable Long id) {
         try {
@@ -43,7 +54,21 @@ public class UserController {
             return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Throwable th) {
             LOGGER.error("Internal Error", th);
-            return new ResponseEntity<>(new ErrorResponse("Internal Error"),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ErrorResponse("Internal Error"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/user/{id}")
+    ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        try {
+            UserEntity user = userService.deleteUser(id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (NotFoundException e) {
+            return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
+        } catch (Throwable th) {
+            LOGGER.error("Internal Error", th);
+            return new ResponseEntity<>(new ErrorResponse("Internal Error"), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
