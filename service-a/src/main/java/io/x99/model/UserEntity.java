@@ -1,23 +1,23 @@
-package io.x99.model.entity;
+package io.x99.model;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "test_table")
-public class TestTableEntity {
+@Table(name = "users")
+public class UserEntity {
     @Id
-    @Column(name = "test_id")
+    @Column(name = "id")
     private Integer id;
-    private String testColumn;
+    private String name;
     private String country;
 
-    public TestTableEntity() {
+    public UserEntity() {
 
     }
 
-    public TestTableEntity(Integer id, String testColumn, String country) {
+    public UserEntity(Integer id, String name, String country) {
         this.id = id;
-        this.testColumn = testColumn;
+        this.name = name;
         this.country = country;
     }
 
@@ -29,12 +29,12 @@ public class TestTableEntity {
         this.id = id;
     }
 
-    public String getTestColumn() {
-        return testColumn;
+    public String getName() {
+        return name;
     }
 
-    public void setTestColumn(String testColumn) {
-        this.testColumn = testColumn;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCountry() {

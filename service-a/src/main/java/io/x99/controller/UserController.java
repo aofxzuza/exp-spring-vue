@@ -1,8 +1,8 @@
 package io.x99.controller;
 
 import io.x99.error.NotFoundException;
-import io.x99.model.entity.TestTableEntity;
-import io.x99.repository.TestTableRepository;
+import io.x99.model.UserEntity;
+import io.x99.repository.UserRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class TestTableController {
-    private final TestTableRepository repository;
+public class UserController {
+    private final UserRepository repository;
 
-    TestTableController(TestTableRepository repository) {
+    UserController(UserRepository repository) {
         this.repository = repository;
     }
 
 
-    @GetMapping("/table")
-    List<TestTableEntity> all() {
+    @GetMapping("/user")
+    List<UserEntity> all() {
         return repository.findAll();
     }
 
-    @GetMapping("/table/{id}")
-    TestTableEntity one(@PathVariable Integer id) {
+    @GetMapping("/user/{id}")
+    UserEntity one(@PathVariable Integer id) {
         return repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Id is not found"));
     }
