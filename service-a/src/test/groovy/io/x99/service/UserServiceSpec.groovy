@@ -3,10 +3,9 @@ package io.x99.service
 import io.x99.error.NotFoundException
 import io.x99.model.UserEntity
 import io.x99.repository.UserRepository
-import org.assertj.core.util.Lists
 import spock.lang.Specification
 
-class PublisherSpec extends Specification {
+class UserServiceSpec extends Specification {
     def userRepo = Mock(UserRepository)
     def userService = new UserService(userRepository: userRepo)
 
