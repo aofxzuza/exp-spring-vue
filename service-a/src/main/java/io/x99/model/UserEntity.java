@@ -1,12 +1,12 @@
 package io.x99.model;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Entity
+
 @Table(name = "users")
 public class UserEntity {
     @Id
-    @Column(name = "id")
     private Long id;
     private String name;
     private String country;

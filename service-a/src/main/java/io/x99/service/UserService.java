@@ -6,6 +6,7 @@ import io.x99.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +21,8 @@ public class UserService {
 
     public List<UserEntity> getAllUsers() {
         LOGGER.debug("Get all users");
-        return userRepository.findAll();
+        Iterable<UserEntity> iterable = userRepository.findAll();
+        return Streamable.of(iterable).toList();
     }
 
     public UserEntity getUserById(Long id) {
