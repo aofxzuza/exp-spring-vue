@@ -1,6 +1,19 @@
 # exp-spring
 Experimental Spring with VueJS
-
+## Tech Stacks
+* Service-A
+  * [Spring Boot Rest](https://spring.io/guides/tutorials/rest/)
+  * [JDBC / Postgresql](https://spring.io/projects/spring-data-jdbc)
+  * [Spock](https://spockframework.org/)
+* Service-B
+  * [Spring MVC / Thymeleaf](https://spring.io/guides/gs/serving-web-content/)
+  * [OpenFeign](https://github.com/OpenFeign/feign)
+* Client
+  * [VueJS](https://vuejs.org/)
+  * [Axios](https://github.com/axios/axios)
+* Dev Environment
+  * [Liquibase](https://www.liquibase.org/)
+  * [docker & docker compose](https://www.docker.com/)
 ## Development
 ### Setup
 #### Database
