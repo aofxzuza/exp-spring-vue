@@ -14,7 +14,7 @@
         <div class="user-name">{{ user.name }}</div>
         <div class="user-country">{{ user.country }}</div>
         <div class="user-actions">
-            <button>Delete</button>
+            <button  @click="deleteUser(user.id)">Delete</button>
         </div>
     </div>
 </template>
@@ -30,6 +30,11 @@ export default {
         ]
     }
   },
+  methods: {
+    deleteUser(user_id, event){
+        alert("Deleting " + user_id);
+    }
+  }
 }
 </script>
 

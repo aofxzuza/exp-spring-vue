@@ -3,14 +3,14 @@
 
 <template>
     <h2>Add New User</h2>
-    <form id="new-user-form" class="form">
+    <form id="new-user-form" class="form" @submit.prevent="submitNewUser">
         <div class="field-group">
-            <label for="name-input">Name:</label>
-            <input type="text" name="name" id="name-input">
+            <label>Name:</label>
+            <input v-model="name" type="text" required>
         </div>
         <div class="field-group">
-            <label for="name-country">Country:</label>
-            <input type="text" name="country"  size="2" id="name-country">
+            <label>Country:</label>
+            <input v-model="country" type="text" maxlength="2" required>
         </div>
         <div class="form-controls">
             <button>
@@ -21,7 +21,21 @@
 </template>
 
 <script>
-</script>
+export default {
+  name: "NewUSerForm",
+  data() {
+    return {
+        name: '',
+        country: ''
+    }
+  },
+  methods: {
+    submitNewUser(event){
+        alert("Adding name " + this.name+ " country " + this.country);
+    }
+  }
+}
+</script>>
 
 <style scoped>
     .field-group {
