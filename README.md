@@ -48,7 +48,7 @@ Start the service B.
 ```bash
 ./gradlew :service-b:bootRun
 ```
-The api is available on http://localhost:8082/table
+Open a browser to http://localhost:8082.
 #### Client
 To start the client, open another Bash shell and navigate to the `vue-client` subdirectory.
 
