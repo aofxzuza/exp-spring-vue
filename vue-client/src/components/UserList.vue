@@ -13,7 +13,9 @@
         <div class="user-id">{{ user.id }}</div>
         <div class="user-name">{{ user.name }}</div>
         <div class="user-country">{{ user.country }}</div>
-        <div class="user-actions">Delete</div>
+        <div class="user-actions">
+            <button>Delete</button>
+        </div>
     </div>
 </template>
 
@@ -35,10 +37,11 @@ export default {
     div.user-row {
         display: flex;
         flex-wrap: wrap;
+        margin-bottom: 8px;
     }
 
     div.user-row.header{
-    border-bottom: 5px solid black;
+        border-bottom: 5px solid black;
     }
 
     div.user-row div:not(:last-child) {
