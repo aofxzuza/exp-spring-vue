@@ -36,12 +36,6 @@ liquibase update
 ./gradlew build
 ```
 
-### Compiles, tests and assembles the code into JAR file
-```bash
-./gradlew build
-```
-
-
 ### Clean up
 remove containers and volumes
 ```bash
