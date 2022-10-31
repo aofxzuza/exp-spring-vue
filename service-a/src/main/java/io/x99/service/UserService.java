@@ -1,5 +1,6 @@
 package io.x99.service;
 
+import io.x99.error.BadRequestException;
 import io.x99.error.NotFoundException;
 import io.x99.model.UserEntity;
 import io.x99.repository.UserRepository;
@@ -32,6 +33,15 @@ public class UserService {
     }
 
     public UserEntity addUser(String name, String country) {
+        if (name == null) {
+            throw new BadRequestException("name doesn't exist");
+        }
+        if (country == null) {
+            throw new BadRequestException("country doesn't exist");
+        }
+        if (country.length() != 2) {
+            throw new BadRequestException("country is invalid");
+        }
         LOGGER.debug("Add new user with name {} country {}", name, country);
         return userRepository.save(new UserEntity(null, name, country));
     }
