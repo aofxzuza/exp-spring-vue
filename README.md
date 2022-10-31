@@ -56,6 +56,7 @@ Start the service B.
 ./gradlew :service-b:bootRun
 ```
 Open a browser to http://localhost:8082.
+![Service-B](./img/service-b-html.png)
 #### Client
 To start the client, open another Bash shell and navigate to the `vue-client` subdirectory.
 
@@ -69,6 +70,8 @@ npm run dev
 ```
 
 Open a browser to http://localhost:8080.
+![vue-clien](./img/vue-client.png)
+
 ### Usage
 #### API usage for service A
 ```bash
