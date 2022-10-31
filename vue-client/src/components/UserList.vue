@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { userStore } from '../stores/userStore.js';
 export default {
   name: "UserList",
@@ -33,6 +32,9 @@ export default {
     deleteUser(user_id, event){
         userStore.removeUserById(user_id);
     }
+  },
+  mounted(){
+    userStore.fetchUser();
   }
 }
 </script>
