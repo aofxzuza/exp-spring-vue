@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { userStore } from '../stores/userStore.js';
 export default {
   name: "NewUSerForm",
   data() {
@@ -31,7 +32,7 @@ export default {
   },
   methods: {
     submitNewUser(event){
-        alert("Adding name " + this.name+ " country " + this.country);
+        userStore.addUser(this.name, this.country);
     }
   }
 }
