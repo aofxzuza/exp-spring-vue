@@ -1,5 +1,6 @@
 package io.x99.service
 
+import io.x99.error.BadRequestException
 import io.x99.error.NotFoundException
 import io.x99.model.UserEntity
 import io.x99.repository.UserRepository
@@ -52,6 +53,22 @@ class UserServiceSpec extends Specification {
         user != null
         user.name == name
         user.country == country
+    }
+
+    def "userService.addUser(#name, #country) must throw BadRequestException"() {
+        when:
+        userService.addUser(name, country)
+
+        then:
+        0 * userRepo.save(_)
+        thrown BadRequestException
+
+        where:
+        name     | country
+        null     | "LK"
+        "rtpk"   | null
+        "rtpk"   | "LKK"
+        "rtpk"   | "T"
     }
 
     def "userService.deleteUser() must be invoked deleteById()"() {
