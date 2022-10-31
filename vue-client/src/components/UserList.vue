@@ -9,7 +9,7 @@
         <div class="user-country">Country</div>
         <div class="user-actions">Actions</div>
     </div>
-    <div v-for="user in users" class="user-row">
+    <div v-for="user in userStore.users" class="user-row">
         <div class="user-id">{{ user.id }}</div>
         <div class="user-name">{{ user.name }}</div>
         <div class="user-country">{{ user.country }}</div>
@@ -20,19 +20,18 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { userStore } from '../stores/userStore.js';
 export default {
   name: "UserList",
   data() {
     return {
-        users: [
-            { id: 1, name: 'A1', country: 'TH' },
-            { id:2, name: 'A2', country: 'TH' }
-        ]
+        userStore
     }
   },
   methods: {
     deleteUser(user_id, event){
-        alert("Deleting " + user_id);
+        userStore.removeUserById(user_id);
     }
   }
 }
