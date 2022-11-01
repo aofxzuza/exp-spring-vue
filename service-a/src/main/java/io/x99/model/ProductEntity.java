@@ -3,22 +3,24 @@ package io.x99.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.math.BigDecimal;
 
-@Table(name = "users")
-public class UserEntity {
+
+@Table(name = "products")
+public class ProductEntity {
     @Id
     private Long id;
     private String name;
-    private String country;
+    private BigDecimal price;
 
-    public UserEntity() {
+    public ProductEntity() {
 
     }
 
-    public UserEntity(Long id, String name, String country) {
+    public ProductEntity(Long id, String name, BigDecimal price) {
         this.id = id;
         this.name = name;
-        this.country = country;
+        this.price = price;
     }
 
     public Long getId() {
@@ -37,11 +39,11 @@ public class UserEntity {
         this.name = name;
     }
 
-    public String getCountry() {
-        return country;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
