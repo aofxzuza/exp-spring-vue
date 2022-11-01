@@ -40,6 +40,9 @@ public class ProductService {
         if (price == null) {
             throw new BadRequestException("price doesn't exist");
         }
+        if (price.compareTo(BigDecimal.ZERO) < 0) {
+            throw new BadRequestException("price is less than 0");
+        }
         LOGGER.debug("Add new product with name {} price {}", name, price);
         return productRepository.save(new ProductEntity(null, name, price));
     }

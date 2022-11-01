@@ -67,7 +67,6 @@ class ProductServiceSpec extends Specification {
         name     | price
         null     | 10.0
         "rtpk"   | null
-        "rtpk"   | 0.0
         "rtpk"   | -0.1
     }
 
