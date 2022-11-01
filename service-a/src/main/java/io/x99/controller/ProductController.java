@@ -1,5 +1,6 @@
 package io.x99.controller;
 
+import io.x99.error.BadRequestException;
 import io.x99.error.ErrorResponse;
 import io.x99.error.NotFoundException;
 import io.x99.model.ProductEntity;
@@ -35,10 +36,12 @@ public class ProductController {
 
 
     @PostMapping("/product")
-    ResponseEntity<?> newUser(@RequestBody ProductRequest productRequest) {
+    ResponseEntity<?> newProduce(@RequestBody ProductRequest productRequest) {
         try {
             ProductEntity user = productService.addProduct(productRequest.getName(), productRequest.getPrice());
             return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (BadRequestException e) {
+            return new ResponseEntity<>(new ErrorResponse(e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (Throwable th) {
             LOGGER.error("Internal Error", th);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
