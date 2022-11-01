@@ -7,87 +7,87 @@ import io.x99.repository.ProductRepository
 import spock.lang.Specification
 
 class ProductServiceSpec extends Specification {
-    def userRepo = Mock(ProductRepository)
-    def userService = new ProductService(productRepository: userRepo)
+    def productRepo = Mock(ProductRepository)
+    def productService = new ProductService(productRepository: productRepo)
 
-    def "userService.getAllUsers() must be invoked findAll()"() {
+    def "productService.getAllProducts() must be invoked findAll()"() {
         when:
-        def users = userService.getAllUsers()
+        def products = productService.getAllProducts()
 
         then:
-        1 * userRepo.findAll() >> [new ProductEntity()]
-        users.size() == 1
+        1 * productRepo.findAll() >> [new ProductEntity()]
+        products.size() == 1
     }
 
-    def "userService.getUserById() must be invoked findById()"() {
+    def "productService.getProductById() must be invoked findById()"() {
         when:
-        def user = userService.getUserById(1)
+        def product = productService.getProductById(1)
 
         then:
-        1 * userRepo.findById(_) >> Optional.of(new ProductEntity())
-        user != null
+        1 * productRepo.findById(_) >> Optional.of(new ProductEntity())
+        product != null
     }
 
-    def "userService.getUserById() must throw NotFoundException when the id doesn't exist"() {
+    def "productService.getProductById() must throw NotFoundException when the id doesn't exist"() {
         when:
-        userService.getUserById(1)
+        productService.getProductById(1)
 
         then:
-        1 * userRepo.findById(_) >> Optional.empty()
+        1 * productRepo.findById(_) >> Optional.empty()
         thrown NotFoundException
     }
 
-    def "userService.addUser() must be invoked save()"() {
+    def "productService.addProduct() must be invoked save()"() {
         given:
-        String name = "NewUser"
-        String country = "LK"
+        String name = "NewProduct"
+        BigDecimal price = 10.0
 
         when:
-        def user = userService.addUser(name, country)
+        def product = productService.addProduct(name, price)
 
         then:
-        1 * userRepo.save(_ as ProductEntity) >> { args ->
-            assert args[0].name == name && args[0].country == country
+        1 * productRepo.save(_ as ProductEntity) >> { args ->
+            assert args[0].name == name && args[0].price == price
             return args[0]
         }
-        user != null
-        user.name == name
-        user.country == country
+        product != null
+        product.name == name
+        product.price == price
     }
 
-    def "userService.addUser(#name, #country) must throw BadRequestException"() {
+    def "productService.addProduct(#name, #price) must throw BadRequestException"() {
         when:
-        userService.addUser(name, country)
+        productService.addProduct(name, price)
 
         then:
-        0 * userRepo.save(_)
+        0 * productRepo.save(_)
         thrown BadRequestException
 
         where:
-        name     | country
-        null     | "LK"
+        name     | price
+        null     | 10.0
         "rtpk"   | null
-        "rtpk"   | "LKK"
-        "rtpk"   | "T"
+        "rtpk"   | 0.0
+        "rtpk"   | -0.1
     }
 
-    def "userService.deleteUser() must be invoked deleteById()"() {
+    def "productService.deleteProduct() must be invoked deleteById()"() {
         when:
-        def user = userService.deleteUser(1)
+        def product = productService.deleteProduct(1)
 
         then:
-        1 * userRepo.findById(_) >> Optional.of(new ProductEntity())
-        1 * userRepo.delete(_)
-        user != null
+        1 * productRepo.findById(_) >> Optional.of(new ProductEntity())
+        1 * productRepo.delete(_)
+        product != null
     }
 
-    def "userService.deleteUser() must throw NotFoundException when the id doesn't exist"() {
+    def "productService.deleteProduct() must throw NotFoundException when the id doesn't exist"() {
         when:
-        userService.deleteUser(1)
+        productService.deleteProduct(1)
 
         then:
-        1 * userRepo.findById(_) >> Optional.empty()
-        0 * userRepo.delete(_)
+        1 * productRepo.findById(_) >> Optional.empty()
+        0 * productRepo.delete(_)
         thrown NotFoundException
     }
 
