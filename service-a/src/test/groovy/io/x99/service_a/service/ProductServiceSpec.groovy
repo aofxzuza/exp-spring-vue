@@ -1,4 +1,4 @@
-package io.x99.service
+package io.x99.service_a.service
 
 import io.x99.service_a.error.BadRequestException
 import io.x99.service_a.error.NotFoundException
