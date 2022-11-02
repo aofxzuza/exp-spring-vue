@@ -1,4 +1,4 @@
-package io.x99.model;
+package io.x99.service_b.model;
 
 public class User {
     private Long id;
