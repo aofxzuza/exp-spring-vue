@@ -5,7 +5,7 @@ plugins {
     id 'groovy'
 }
 
-group 'io.x99'
+group 'io.x99.service_a'
 version '1.0-SNAPSHOT'
 sourceCompatibility = '17'
 

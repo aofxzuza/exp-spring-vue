@@ -1,4 +1,4 @@
-package io.x99.error;
+package io.x99.service_a.error;
 
 public class NotFoundException  extends RuntimeException {
 

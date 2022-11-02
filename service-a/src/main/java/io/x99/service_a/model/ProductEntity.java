@@ -1,4 +1,4 @@
-package io.x99.model;
+package io.x99.service_a.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;

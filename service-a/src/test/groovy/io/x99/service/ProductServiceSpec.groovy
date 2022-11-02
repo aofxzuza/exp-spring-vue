@@ -1,9 +1,10 @@
 package io.x99.service
 
-import io.x99.error.BadRequestException
-import io.x99.error.NotFoundException
-import io.x99.model.ProductEntity
-import io.x99.repository.ProductRepository
+import io.x99.service_a.error.BadRequestException
+import io.x99.service_a.error.NotFoundException
+import io.x99.service_a.model.ProductEntity
+import io.x99.service_a.repository.ProductRepository
+import io.x99.service_a.service.ProductService
 import spock.lang.Specification
 
 class ProductServiceSpec extends Specification {

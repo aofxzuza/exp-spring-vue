@@ -1,9 +1,9 @@
-package io.x99.service;
+package io.x99.service_a.service;
 
-import io.x99.error.BadRequestException;
-import io.x99.error.NotFoundException;
-import io.x99.model.ProductEntity;
-import io.x99.repository.ProductRepository;
+import io.x99.service_a.error.BadRequestException;
+import io.x99.service_a.error.NotFoundException;
+import io.x99.service_a.model.ProductEntity;
+import io.x99.service_a.repository.ProductRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
