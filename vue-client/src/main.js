@@ -23,22 +23,23 @@ keycloak.init({
     window.location.reload();
   } else {
     console.log("Authenticated");
-    createApp(App).mount('#app');
+    const app = createApp(App)
+    app.config.globalProperties.keycloak = keycloak;
+    app.mount('#app');
   }
   //Token Refresh
   setInterval(() => {
     keycloak.updateToken(70).then((refreshed) => {
       if (refreshed) {
-        console.log('Token refreshed' + refreshed);
+        console.log('Token refreshed', refreshed);
       } else {
-        console.log('Token not refreshed, valid for ' +
+        console.log('Token not refreshed, valid for',
           Math.round(keycloak.tokenParsed.exp + keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
       }
     }).catch((e) => {
       console.log('Failed to refresh token', e);
     });
   }, 6000)
-
 }).catch((e) => {
   console.log('Authenticated Failed', e);
 });
