@@ -3,12 +3,12 @@ import {
 } from 'vue'
 import App from './App.vue'
 import Keycloak from 'keycloak-js';
-
+import { userStore } from './stores/userStore.js';
 import './assets/main.css'
 
 
 let initOptions = {
-  url: 'http://127.0.0.1:8180',
+  url: 'http://localhost:8180',
   realm: 'myrealm',
   clientId: 'app-vue',
   onLoad: 'login-required'
@@ -25,6 +25,11 @@ keycloak.init({
     console.log("Authenticated");
     const app = createApp(App)
     app.config.globalProperties.keycloak = keycloak;
+    userStore.login({
+      idToken: keycloak.idToken,
+      accessToken: keycloak.token,
+      username: keycloak.tokenParsed.preferred_username,
+    });
     app.mount('#app');
   }
   //Token Refresh
@@ -32,6 +37,11 @@ keycloak.init({
     keycloak.updateToken(70).then((refreshed) => {
       if (refreshed) {
         console.log('Token refreshed', refreshed);
+        userStore.refreshToken({
+          idToken: keycloak.idToken,
+          accessToken: keycloak.token
+        });
+        con
       } else {
         console.log('Token not refreshed, valid for',
           Math.round(keycloak.tokenParsed.exp + keycloak.timeSkew - new Date().getTime() / 1000) + ' seconds');

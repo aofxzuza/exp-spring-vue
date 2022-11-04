@@ -1,36 +1,37 @@
 <script setup>
-import UserList from './components/UserList.vue'
-import NewUserForm from './components/NewUserForm.vue'
+import ProductList from './components/ProductList.vue'
+import NewProductForm from './components/NewProductForm.vue'
 </script>
 
 <template>
     <div class="header">
         <h1>Exp-Spring Client</h1>
         <div class="nav-menu">
-            <div>{{ username }}</div>
+            <div>{{ userStore.username }}</div>
             <button @click="logout">Logout</button>
         </div>
     </div>
     <div class="content">
-        <div class="user-list">
-            <UserList />
+        <div class="product-list">
+            <ProductList />
         </div>
-        <div class="new-user-form">
-            <NewUserForm />
+        <div class="new-product-form">
+            <NewProductForm />
         </div>
     </div>
 </template>
 
 <script>
+import { userStore } from './stores/userStore.js';
 export default {
     data() {
         return {
-            username: this.keycloak.tokenParsed.preferred_username
+            userStore
         }
     },
     methods: {
         logout(event) {
-            var logoutOptions = { redirectUri: "http://127.0.0.1:8080" };
+            var logoutOptions = { redirectUri: "http://localhost:8080" };
             console.log("--> log: logoutOptions  ", logoutOptions);
             this.keycloak.logout(logoutOptions)
                 .then(success => console.log("--> log: logout success ", success))
@@ -67,13 +68,13 @@ export default {
     max-width: 1024px;
 }
 
-.user-list {
+.product-list {
     flex: 2;
     padding: 8px;
     min-width: 400px;
 }
 
-.new-user-form {
+.new-product-form {
     flex: 1;
     padding: 8px;
     min-width: 300px;

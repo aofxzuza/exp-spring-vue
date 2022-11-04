@@ -2,15 +2,15 @@
 </script>
 
 <template>
-    <h2>Add New User</h2>
-    <form id="new-user-form" class="form" @submit.prevent="submitNewUser">
+    <h2>Add New Product</h2>
+    <form id="new-product-form" class="form" @submit.prevent="submitNewProduct">
         <div class="field-group">
             <label>Name:</label>
             <input v-model="name" type="text" required>
         </div>
         <div class="field-group">
-            <label>Country:</label>
-            <input v-model="country" type="text" maxlength="2" required>
+            <label>Price:</label>
+            <input v-model="price" type="number" required>
         </div>
         <div class="form-controls">
             <button>
@@ -21,18 +21,18 @@
 </template>
 
 <script>
-import { userStore } from '../stores/userStore.js';
+import { productStore } from '../stores/productStore.js';
 export default {
-  name: "NewUSerForm",
+  name: "NewProductForm",
   data() {
     return {
         name: '',
-        country: ''
+        price: ''
     }
   },
   methods: {
-    submitNewUser(event){
-        userStore.addUser(this.name, this.country);
+    submitNewProduct(event){
+        productStore.addProduct(this.name, this.price);
     }
   }
 }
