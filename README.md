@@ -103,7 +103,7 @@ Start the service B.
 ```
 Open a browser to http://localhost:8082.
 ![Service-B](./img/service-b-html.png)
-#### Vue Client
+### Vue Client [Vue-client Usage](./vue-client/README.md)
 Start the client.
 ```bash
 npm run dev
