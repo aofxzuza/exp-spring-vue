@@ -14,13 +14,16 @@ Experimental Spring with VueJS
 * Dev Environment
   * [Liquibase](https://www.liquibase.org/)
   * [docker & docker compose](https://www.docker.com/)
+
+
 ## Development
-### Setup
-#### Database
-Run docker-compose contain postgresql
+### Setup Containers
+Run docker-compose containers
 ```bash
 docker compose up -d
 ```
+
+### Database
 Run database migration
 ```bash
 cd liquibase
@@ -73,6 +76,7 @@ Open a browser to http://localhost:8080.
 ![vue-clien](./img/vue-client.png)
 
 ### Usage
+#### [Keycloak Usage](./realm/README.md)
 #### API usage for service A
 ```bash
 # get all users
