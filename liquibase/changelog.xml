@@ -9,33 +9,6 @@
                          incrementBy="1"
                          minValue="1"
                          schemaName="public"
-                         sequenceName="user_id_seq"
-                         startValue="1"/>
-        <createTable tableName="users">
-            <column name="id" type="bigint" defaultValueSequenceNext="user_id_seq">
-            </column>
-            <column name="username" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="password" type="varchar(255)" >
-                <constraints nullable="false"/>
-            </column>
-            <column name="account_non_locked" type="bool" defaultValue="true">
-                <constraints nullable="false"/>
-            </column>
-            <column name="name" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="role" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Rattapong K." id="2">
-        <createSequence  dataType="bigint"
-                         incrementBy="1"
-                         minValue="1"
-                         schemaName="public"
                          sequenceName="product_id_seq"
                          startValue="1"/>
         <createTable tableName="products">
