@@ -14,18 +14,33 @@ Experimental Spring with VueJS
 * Dev Environment
   * [Liquibase](https://www.liquibase.org/)
   * [docker & docker compose](https://www.docker.com/)
+
+
 ## Development
-### Setup
-#### Database
-Run docker-compose contain postgresql
+---
+### Setup Environments
+Create and start containers
 ```bash
 docker compose up -d
 ```
+
+Stop and remove containers, networks and volumns
+```bash
+docker compose down -v
+```
+
 Run database migration
 ```bash
 cd liquibase
 liquibase update
 ```
+
+Install the dependencies for `vue-client`
+```bash
+cd vue-client
+npm install
+```
+
 ### Run test
 ```bash
 ./gradlew test
@@ -36,57 +51,58 @@ liquibase update
 ./gradlew build
 ```
 
-### Clean up
-remove containers and volumes
-```bash
-docker compose down -v
-```
-### Run an application
-
-#### Service A
+## Run applications
+---
+### Service A
 Start the service A.
 ```bash
 ./gradlew :service-a:bootRun
 ```
-The api is available on http://localhost:8081/user
-#### Service B
+The api is available on http://localhost:8081/products
 
+### Service B
 Start the service B.
 ```bash
 ./gradlew :service-b:bootRun
 ```
 Open a browser to http://localhost:8082.
 ![Service-B](./img/service-b-html.png)
-#### Client
-To start the client, open another Bash shell and navigate to the `vue-client` subdirectory.
-
-Install the dependencies.
-```bash
-npm install
-```
+#### Vue Client
 Start the client.
 ```bash
 npm run dev
 ```
-
 Open a browser to http://localhost:8080.
 ![vue-clien](./img/vue-client.png)
 
-### Usage
+## Usage
+#### [Keycloak Usage](./realm/README.md)
+#### [Liquibase Usage](./liquibase/README.md)
+#### [Vue-client Usage](./vue-client/README.md)
 #### API usage for service A
 ```bash
-# get all users
-curl -i "http://localhost:8081/user"
+export TOKEN=$(curl -X POST "http://localhost:8180/realms/myrealm/protocol/openid-connect/token" \
+-d "client_id=spring-app" \
+-d "username=myuser" \
+-d "password=password" \
+-d "grant_type=password" | jq -r '.access_token')
 
-# get a single user
-curl -i "http://localhost:8081/user/1"
+# get all products
+curl -v -X GET "http://localhost:8081/product" \
+-H "Authorization: Bearer $TOKEN" | jq .
 
-# create user
-curl -i -X POST "http://localhost:8081/user" \
+# add product
+curl -v -X POST "http://localhost:8081/product" \
       -H "Content-Type:application/json" \
-      -d '{ "name": "rtpk", "country": "TH" }'
-      
-# delete user
-curl -i -X DELETE "http://localhost:8081/user/7"
+      -H "Authorization: Bearer $TOKEN" \
+      -d '{ "name": "rtpk", "price": 100 }' | jq .
+
+# get a product
+curl -v -X GET "http://localhost:8081/product/1" \
+-H "Authorization: Bearer $TOKEN" | jq .
+
+# delete product
+curl -v -X DELETE "http://localhost:8081/product/1" \
+-H "Authorization: Bearer $TOKEN" | jq .
 ```
 

@@ -5,38 +5,22 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <changeSet author="Rattapong K." id="1">
-        <createSequence  dataType="int"
+        <createSequence  dataType="bigint"
                          incrementBy="1"
                          minValue="1"
                          schemaName="public"
-                         sequenceName="user_id_seq"
+                         sequenceName="product_id_seq"
                          startValue="1"/>
-        <createTable tableName="users">
-            <column name="id" type="bigint" defaultValueSequenceNext="user_id_seq">
+        <createTable tableName="products">
+            <column name="id" type="bigint" defaultValueSequenceNext="product_id_seq">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="name" type="varchar"/>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
-    </changeSet>
-    <changeSet author="Rattapong K." id="2">
-        <addColumn tableName="users">
-            <column name="country" type="varchar(2)"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Rattapong K." id="3">
-        <insert tableName="users">
-            <column name="name" value="RTPK"/>
-            <column name="country" value="TH"/>
-        </insert>
-        <insert tableName="users">
-            <column name="name" value="RTPK2"/>
-            <column name="country" value="TH"/>
-        </insert>
-    </changeSet>
-    <changeSet author="Rattapong K." id="4">
-        <insert tableName="users">
-            <column name="name" value="RTPK4"/>
-            <column name="country" value="TH"/>
-        </insert>
     </changeSet>
 </databaseChangeLog>

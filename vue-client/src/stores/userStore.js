@@ -1,28 +1,20 @@
-import { reactive } from 'vue'
-import axios from 'axios';
+import {
+  reactive
+} from 'vue'
 
 export const userStore = reactive({
-  id: 1,
-  users: [],
-  fetchUser(){
-    axios.get('/api/user')
-      .then(response => {
-        console.log("Fetch User", response.data);
-        this.users = response.data;
-      });
+  idToken: null,
+  accessToken: null,
+  username: null,
+  login(payload) {
+    console.log('login', payload);
+    this.idToken = payload.idToken;
+    this.accessToken = payload.accessToken;
+    this.username = payload.username
   },
-  addUser(name, country){
-    axios.post('/api/user', { name, country})
-      .then((response) => {
-        console.log("Added User", response.data);
-        this.fetchUser();
-      });
-  },
-  removeUserById(id){
-    axios.delete(`/api/user/${id}`)
-      .then(() => {
-        console.log("Delete User Id", id);
-        this.fetchUser();
-      });
+  refreshToken(payload) {
+    console.log('refreshToken', payload);
+    this.idToken = payload.idToken;
+    this.accessToken = payload.accessToken;
   }
 })

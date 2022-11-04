@@ -13,5 +13,17 @@ services:
       - '5432:5432'
     volumes:
       - postgres:/data/postgres
+  keycloak:
+    container_name: keycloak_container
+    image: quay.io/keycloak/keycloak:20.0.0
+    command: start-dev --import-realm
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - '8180:8080'
+    volumes:
+      - ./realm/myrealm.json:/opt/keycloak/data/import/myrealm.json
+
 volumes:
   postgres:
