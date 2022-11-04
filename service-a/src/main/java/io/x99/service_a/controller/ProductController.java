@@ -11,11 +11,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/product")
 public class ProductController {
     private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
@@ -23,7 +25,8 @@ public class ProductController {
     private ProductService productService;
 
 
-    @GetMapping("/product")
+    @PreAuthorize("hasRole('api')")
+    @GetMapping
     ResponseEntity<?> all() {
         try {
             List<ProductEntity> users = productService.getAllProducts();
@@ -34,8 +37,8 @@ public class ProductController {
         }
     }
 
-
-    @PostMapping("/product")
+    @PreAuthorize("hasRole('api')")
+    @PostMapping
     ResponseEntity<?> newProduce(@RequestBody ProductRequest productRequest) {
         try {
             ProductEntity user = productService.addProduct(productRequest.getName(), productRequest.getPrice());
@@ -48,7 +51,8 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/product/{id}")
+    @PreAuthorize("hasRole('api')")
+    @GetMapping("/{id}")
     ResponseEntity<?> one(@PathVariable Long id) {
         try {
             ProductEntity product = productService.getProductById(id);
@@ -61,7 +65,8 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/product/{id}")
+    @PreAuthorize("hasRole('api')")
+    @DeleteMapping("/{id}")
     ResponseEntity<?> deleteUser(@PathVariable Long id) {
         try {
             ProductEntity product = productService.deleteProduct(id);
