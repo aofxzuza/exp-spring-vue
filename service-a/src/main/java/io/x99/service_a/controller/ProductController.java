@@ -37,7 +37,7 @@ public class ProductController {
         }
     }
 
-    @PreAuthorize("hasRole('api')")
+    @PreAuthorize("hasRole('admin-api')")
     @PostMapping
     ResponseEntity<?> newProduce(@RequestBody ProductRequest productRequest) {
         try {
@@ -65,7 +65,7 @@ public class ProductController {
         }
     }
 
-    @PreAuthorize("hasRole('api')")
+    @PreAuthorize("hasRole('admin-api')")
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteUser(@PathVariable Long id) {
         try {
