@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +24,6 @@ public class ProductController {
     private ProductService productService;
 
 
-    @PreAuthorize("hasRole('api')")
     @GetMapping
     ResponseEntity<?> all() {
         try {
@@ -37,7 +35,6 @@ public class ProductController {
         }
     }
 
-    @PreAuthorize("hasRole('admin-api')")
     @PostMapping
     ResponseEntity<?> newProduce(@RequestBody ProductRequest productRequest) {
         try {
@@ -51,7 +48,6 @@ public class ProductController {
         }
     }
 
-    @PreAuthorize("hasRole('api')")
     @GetMapping("/{id}")
     ResponseEntity<?> one(@PathVariable Long id) {
         try {
@@ -65,7 +61,6 @@ public class ProductController {
         }
     }
 
-    @PreAuthorize("hasRole('admin-api')")
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteUser(@PathVariable Long id) {
         try {
