@@ -1,5 +1,6 @@
 package io.x99.service_b.service;
 
+import io.x99.service_b.config.ServiceAClientConfig;
 import io.x99.service_b.model.Product;
 import io.x99.service_b.model.ProductRequest;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(name = "serviceA", url = "${service-a.url}")
+@FeignClient(name = "serviceA", url = "${service-a.url}", configuration = ServiceAClientConfig.class)
 public interface ServiceAClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/product")
