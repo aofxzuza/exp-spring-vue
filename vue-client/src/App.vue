@@ -7,7 +7,7 @@ import NewProductForm from './components/NewProductForm.vue'
     <div class="header">
         <h1>Exp-Spring Client</h1>
         <div class="nav-menu">
-            <div>{{ userStore.username }}</div>
+            <div>{{ username }}</div>
             <button @click="logout">Logout</button>
         </div>
     </div>
@@ -22,12 +22,11 @@ import NewProductForm from './components/NewProductForm.vue'
 </template>
 
 <script>
-import { userStore } from './stores/userStore.js';
+import { mapState } from 'pinia'
+import { useUserStore } from './stores/userStore.js';
 export default {
-    data() {
-        return {
-            userStore
-        }
+    computed: {
+        ...mapState(useUserStore, ['username'])
     },
     methods: {
         logout(event) {
