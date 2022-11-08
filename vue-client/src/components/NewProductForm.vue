@@ -21,32 +21,35 @@
 </template>
 
 <script>
-import { productStore } from '../stores/productStore.js';
+import { useProductStore } from '../stores/productStore.js';
+import { mapActions } from 'pinia'
 export default {
-  name: "NewProductForm",
-  data() {
-    return {
-        name: '',
-        price: ''
+    name: "NewProductForm",
+    data() {
+        return {
+            name: '',
+            price: ''
+        }
+    },
+    methods: {
+        ...mapActions(useProductStore, ['addProduct']),
+        submitNewProduct(event) {
+            this.addProduct(this.name, this.price);
+        }
     }
-  },
-  methods: {
-    submitNewProduct(event){
-        productStore.addProduct(this.name, this.price);
-    }
-  }
 }
 </script>>
 
 <style scoped>
-    .field-group {
-        margin-top: 8px;
-        display: flex;
-        flex-direction: column;
-    }
-    .form-controls {
-        margin-top: 16px;
-        display: flex;
-        justify-content: end;
-    }
+.field-group {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-controls {
+    margin-top: 16px;
+    display: flex;
+    justify-content: end;
+}
 </style>

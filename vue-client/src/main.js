@@ -3,7 +3,12 @@ import {
 } from 'vue'
 import App from './App.vue'
 import Keycloak from 'keycloak-js';
-import { userStore } from './stores/userStore.js';
+import {
+  createPinia
+} from 'pinia';
+import {
+  useUserStore
+} from './stores/userStore.js';
 import './assets/main.css'
 
 
@@ -15,6 +20,7 @@ let initOptions = {
 }
 
 let keycloak = new Keycloak(initOptions);
+let userStore = null;
 
 keycloak.init({
   onLoad: initOptions.onLoad
@@ -23,13 +29,17 @@ keycloak.init({
     window.location.reload();
   } else {
     console.log("Authenticated");
-    const app = createApp(App)
+    const pinia = createPinia();
+    const app = createApp(App);
+    app.use(pinia);
     app.config.globalProperties.keycloak = keycloak;
+    userStore = useUserStore();
     userStore.login({
       idToken: keycloak.idToken,
       accessToken: keycloak.token,
       username: keycloak.tokenParsed.preferred_username,
     });
+
     app.mount('#app');
   }
   //Token Refresh
@@ -37,7 +47,7 @@ keycloak.init({
     keycloak.updateToken(70).then((refreshed) => {
       if (refreshed) {
         console.log('Token refreshed', refreshed);
-        userStore.refreshToken({
+        userStore?.refreshToken({
           idToken: keycloak.idToken,
           accessToken: keycloak.token
         });

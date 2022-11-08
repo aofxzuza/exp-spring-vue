@@ -9,67 +9,67 @@
         <div class="product-price">price</div>
         <div class="product-actions">Actions</div>
     </div>
-    <div v-for="product in productStore.products" class="product-row">
+    <div v-for="product in products" class="product-row">
         <div class="product-id">{{ product.id }}</div>
         <div class="product-name">{{ product.name }}</div>
         <div class="user-price">{{ product.price }}</div>
         <div class="product-actions">
-            <button  @click="deleteProduct(product.id)">Delete</button>
+            <button @click="deleteProduct(product.id)">Delete</button>
         </div>
     </div>
 </template>
 
 <script>
-import { productStore } from '../stores/productStore.js';
+import { useProductStore } from '../stores/productStore.js';
+import { mapState, mapActions } from 'pinia'
+
 export default {
-  name: "ProductList",
-  data() {
-    return {
-        productStore
+    name: "ProductList",
+    computed: {
+        ...mapState(useProductStore, ['products'])
+    },
+    methods: {
+        ...mapActions(useProductStore, ['fetchProduct', 'removeProductById']),
+        deleteProduct(id, event) {
+            this.removeProductById(id);
+        }
+    },
+    mounted() {
+        this.fetchProduct();
     }
-  },
-  methods: {
-    deleteProduct(id, event){
-        productStore.removeProductById(id);
-    }
-  },
-  mounted(){
-    productStore.fetchProduct();
-  }
 }
 </script>
 
 <style scoped>
-    div.product-row {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 8px;
-    }
+div.product-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
 
-    div.product-row.header{
-        border-bottom: 5px solid black;
-    }
+div.product-row.header {
+    border-bottom: 5px solid black;
+}
 
-    div.product-row div:not(:last-child) {
-        margin-right: 8px;
-    }
+div.product-row div:not(:last-child) {
+    margin-right: 8px;
+}
 
-    .product-row .product-id {
-        width: 30px;
-    }
+.product-row .product-id {
+    width: 30px;
+}
 
-    .product-row .product-name {
-        flex: 1;
-    }
+.product-row .product-name {
+    flex: 1;
+}
 
-    .product-row .product-country {
-        width: 80px;
-    }
+.product-row .product-country {
+    width: 80px;
+}
 
-    .product-row .product-actions {
-        display: flex;
-        justify-content: end;
-        width: 80px;
-    }
-
+.product-row .product-actions {
+    display: flex;
+    justify-content: end;
+    width: 80px;
+}
 </style>
