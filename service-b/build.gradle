@@ -17,10 +17,13 @@ ext {
 }
 
 dependencies {
+    // dependencies for keycloak
+    implementation platform('org.keycloak.bom:keycloak-adapter-bom:20.0.0')
+    implementation 'org.keycloak:keycloak-spring-security-adapter:20.0.0'
+    implementation 'org.keycloak:keycloak-spring-boot-starter'
+
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'io.github.openfeign:feign-okhttp'
     compileOnly 'org.projectlombok:lombok'

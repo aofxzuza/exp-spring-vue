@@ -1,4 +1,4 @@
-package io.x99.service_a.config;
+package io.x99.service_b.config;
 
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
@@ -42,3 +42,4 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
                 .and().csrf().disable();
     }
 }
+
