@@ -5,15 +5,15 @@
     <h2>Add New Product</h2>
     <form id="new-product-form" class="form" @submit.prevent="submitNewProduct">
         <div class="field-group">
-            <label>Name:</label>
-            <input v-model="name" type="text" required>
+            <label for="productNameInput">Name:</label>
+            <input v-model="name" id="productNameInput" type="text" required>
         </div>
         <div class="field-group">
-            <label>Price:</label>
-            <input v-model="price" type="number" required>
+            <label for="productPriceInput">Price:</label>
+            <input v-model="price" id="productPriceInput" type="number" required>
         </div>
         <div class="form-controls">
-            <button>
+            <button id="addProductBtn">
                 Add
             </button>
         </div>

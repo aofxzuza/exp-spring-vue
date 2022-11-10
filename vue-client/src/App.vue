@@ -7,7 +7,7 @@ import NewProductForm from './components/NewProductForm.vue'
     <div class="header">
         <h1>Exp-Spring Client</h1>
         <div class="nav-menu">
-            <div>{{ username }}</div>
+            <div class="username">{{ username }}</div>
             <button @click="logout">Logout</button>
         </div>
     </div>
