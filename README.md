@@ -16,6 +16,7 @@ Experimental Spring with VueJS
   * [Liquibase](https://www.liquibase.org/)
   * [Docker & Docker compose](https://www.docker.com/)
   * [Keycloak](www.keycloak.org)
+  * [Cypress](https://www.cypress.io/)
 
 
 ## Development
@@ -46,8 +47,14 @@ npm install
 ```
 
 ### Run test
+Run unittests
 ```bash
 ./gradlew test
+```
+
+Run cypress testing (UI testing)
+```bash
+npx cypress open
 ```
 
 ### Compiles, tests and assembles the code into JAR file
