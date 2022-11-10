@@ -12,7 +12,7 @@
     <div v-for="product in products" class="product-row">
         <div class="product-id">{{ product.id }}</div>
         <div class="product-name">{{ product.name }}</div>
-        <div class="user-price">{{ product.price }}</div>
+        <div class="product-price">{{ product.price }}</div>
         <div class="product-actions">
             <button @click="deleteProduct(product.id)">Delete</button>
         </div>
